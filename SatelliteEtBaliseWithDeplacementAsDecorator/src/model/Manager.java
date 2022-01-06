@@ -11,6 +11,7 @@ import nicellipse.component.NiLabel;
 public class Manager {
 	ArrayList<Satellite> sats = new ArrayList<Satellite>();
 	ArrayList<Balise> bals = new ArrayList<Balise>();
+	ArrayList<Antenne> ants = new ArrayList<Antenne>();
 	
 	public void addBalise(Balise bal) {
 		bals.add(bal);
@@ -20,6 +21,11 @@ public class Manager {
 		this.sats.add(sat);
 		sat.setManager(this);
 	}
+	public void addAntenne(Antenne ant) {
+		this.ants.add(ant);
+		this.antenneReadyForSynchro(ant);
+		ant.setManager(this);
+	}
 	public void tick() {
 		for (Balise b : this.bals) {
 			b.tick();
@@ -27,16 +33,26 @@ public class Manager {
 		for (Satellite s : this.sats) {
 			s.tick();
 		}
+		for (Antenne a : this.ants) {
+			a.tick();
+		}
 	}
 	
 	public void baliseReadyForSynchro(Balise b) {
-		for (Satellite s : this.sats) {			
+		for (Satellite s : this.sats) {
 			s.registerListener(SatelliteMoved.class, b);
 		}
 	}
+
 	public void baliseSynchroDone(Balise b) {
 		for (Satellite s : this.sats) {			
 			s.unregisterListener(SatelliteMoved.class, b);
+		}
+	}
+
+	public void antenneReadyForSynchro(Antenne a) {
+		for (Satellite s : this.sats) {
+			s.registerListener(SatelliteMoved.class, a);
 		}
 	}
 

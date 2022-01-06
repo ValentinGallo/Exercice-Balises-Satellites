@@ -11,18 +11,13 @@ import views.GrProgressIndicator;
 public class Balise extends ElementMobile implements SatelitteMoveListener{
 
 	/**
-	 * Instance de la barre de progression
-	 */
-	public GrProgressIndicator progressIndicator;
-
-	/**
 	 * Boolean qui précise si la balise est en collecte ou non
 	 */
 	boolean isCollectingData = true;
 
 	/**
 	 * Constructeur de la Balise
-	 * @param memorySize Quantité de données que peut transmettre la balise
+	 * @param memorySize Quantité de données que peut recevoir la balise
 	 */
 	public Balise(int memorySize) {
 		super(memorySize);
@@ -47,7 +42,6 @@ public class Balise extends ElementMobile implements SatelitteMoveListener{
 	 * Elle permet aussi de changer l'indicateur de progression de collecte de données
 	 */
 	public void tick() {
-		this.progressIndicator.changeProgressIndicator(this);
 		if (isCollectingData) {
 			this.readSensors();
 			if(this.memoryFull()) {
@@ -70,6 +64,5 @@ public class Balise extends ElementMobile implements SatelitteMoveListener{
 		DeplacementBalise dp = (DeplacementBalise) this.depl;
 		dp.whenSatelitteMoved(arg, this);
 	}
-
 
 }

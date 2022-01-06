@@ -10,7 +10,7 @@ public class Satellite extends ElementMobile {
 
 	/**
 	 * Constructeur du satellite
-	 * @param memorySize Quantité de données que peut transmettre la satellite
+	 * @param memorySize Quantité de données que peut recevoir le satellite
 	 */
 	public Satellite(int memorySize) {
 		super(memorySize);
@@ -21,7 +21,4 @@ public class Satellite extends ElementMobile {
 		this.send(new SatelliteMoved(this));		
 	}
 
-	public void getData(int dataRecieve){
-		this.dataSize+=dataRecieve;
-	}
 }

@@ -27,12 +27,11 @@ public class DeplSynchronisation extends DeplacementBalise {
 		Satellite sat = (Satellite) arg.getSource();
 		int satX = sat.getPosition().x;
 		int tarX = target.getPosition().x;
-		if (satX > tarX - 10 && satX < tarX + 10) {
+		if (satX > tarX - 10 && satX < tarX + 10 && !sat.memoryFull()) {
 			this.synchro = sat;
 			target.send(new SynchroEvent(this));
 			this.synchro.send(new SynchroEvent(this));
-			target.resetData();
-			synchro.getData(target.memorySize);
+			target.sendData(sat);
 		}
 	}
 

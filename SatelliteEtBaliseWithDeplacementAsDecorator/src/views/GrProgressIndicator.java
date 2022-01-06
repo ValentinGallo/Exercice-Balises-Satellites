@@ -1,6 +1,7 @@
 package views;
 
 import model.Balise;
+import model.ElementMobile;
 import nicellipse.component.NiImage;
 
 import javax.imageio.ImageIO;
@@ -33,12 +34,12 @@ public class GrProgressIndicator extends GrElementMobile {
         return resizedImage;
     }
 
-    public void changeProgressIndicator(Balise balise) {
+    public void changeProgressIndicator(ElementMobile element) {
         this.remove(0);
 
         BufferedImage rawImage = null;
         try {
-            File path = this.getProgressIndicatorFileToDisplay(balise);
+            File path = this.getProgressIndicatorFileToDisplay(element);
             rawImage = ImageIO.read(path);
             rawImage = this.resizeImage(rawImage, 20, ((int) this.getHeight()));
             this.add(new NiImage(rawImage));
@@ -47,13 +48,13 @@ public class GrProgressIndicator extends GrElementMobile {
         }
     }
 
-    public File getProgressIndicatorFileToDisplay(Balise balise) {
+    public File getProgressIndicatorFileToDisplay(ElementMobile element) {
         File path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/0.png");
 
-        if(balise.dataSize() >= balise.memorySize()/4) path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/25.png");
-        if(balise.dataSize() >= balise.memorySize()/2) path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/50.png");
-        if(balise.dataSize() >= ((balise.memorySize()/2) + (balise.memorySize()/4))) path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/75.png");
-        if(balise.dataSize() == balise.memorySize()) path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/100.png");
+        if(element.dataSize() >= element.memorySize()/4) path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/25.png");
+        if(element.dataSize() >= element.memorySize()/2) path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/50.png");
+        if(element.dataSize() >= ((element.memorySize()/2) + (element.memorySize()/4))) path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/75.png");
+        if(element.dataSize() == element.memorySize()) path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/100.png");
 
         return path;
     }

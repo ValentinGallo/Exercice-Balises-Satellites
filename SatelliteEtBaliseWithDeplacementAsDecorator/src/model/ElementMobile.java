@@ -5,6 +5,8 @@ import java.awt.Point;
 import eventHandler.AbstractEvent;
 import eventHandler.EventHandler;
 import events.PositionChanged;
+import events.SatelliteMoved;
+import views.GrProgressIndicator;
 
 /**
  * Class mère des éléments mobiles de la simulation (Satellite ou Balise)
@@ -16,6 +18,11 @@ public class ElementMobile {
 	int memorySize;
 	int dataSize;
 	Manager manager;
+
+	/**
+	 * Instance de la barre de progression
+	 */
+	public GrProgressIndicator progressIndicator;
 
 	public ElementMobile(int memorySize) {
 		eventHandler = new EventHandler();
@@ -45,6 +52,21 @@ public class ElementMobile {
 		this.dataSize = 0;
 	}
 
+	protected void sendData(ElementMobile element) {
+		int availableData = element.getAvailableData();
+		int dataSend = this.dataSize;
+
+		if(availableData > this.dataSize) this.resetData();
+		else {
+			this.dataSize -= availableData;
+			dataSend = availableData;
+		}
+
+		element.dataSize += dataSend;
+	}
+
+	public int getAvailableData() { return this.memorySize - this.dataSize; }
+
 	protected boolean memoryFull() {
 		return (this.dataSize >= this.memorySize);
 	}
@@ -64,6 +86,7 @@ public class ElementMobile {
 	}
 
 	public void tick() {
+		this.progressIndicator.changeProgressIndicator(this);
 		this.bouge();
 	}
 
