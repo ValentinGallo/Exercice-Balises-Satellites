@@ -19,6 +19,7 @@ public class Redescendre extends DeplacementBalise {
 			if (y > this.profondeur) y = this.profondeur;
 			target.setPosition(new Point(p.x, y));
 		}  else {
+			target.isCollectingData =true;
 			target.setDeplacement(next);
 		}
 	}

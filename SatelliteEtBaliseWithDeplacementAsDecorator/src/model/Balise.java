@@ -4,13 +4,13 @@ import events.SatelitteMoveListener;
 import events.SatelliteMoved;
 
 /**
- * Class Balise qui hérite de ElementMobile
- * Elle implémente l'interface SatelitteMoveListener
+ * Class Balise qui hérite de ElementMobile et implémente l'interface SatelitteMoveListener
+ * Elle communique avec les satellites
  */
 public class Balise extends ElementMobile implements SatelitteMoveListener{
 
-	//Boolean qui précise si la balise est en collecte ou non
-	boolean isCollectingData = false;
+	// Boolean qui précise si la balise est en collecte ou non
+	boolean isCollectingData = true;
 	
 	public Balise(int memorySize) {
 		super(memorySize);
@@ -21,30 +21,32 @@ public class Balise extends ElementMobile implements SatelitteMoveListener{
 	}
 	
 	protected void readSensors() {
-			this.dataSize++;
+		this.dataSize++;
 	}
 
 	/**
-	 * Action réalisé pour chaque tick sur la balise
+	 * Fonction appelée à chaque tick qui permet de réaliser les actions et déplacements de la balise
 	 */
 	public void tick() {
-		if (!this.isCollectingData) this.readSensors();
-		if (this.memoryFull()) {
+		this.readSensors();
+		if (this.memoryFull() && isCollectingData) {
 			Deplacement redescendre = new Redescendre(this.deplacement(), this.profondeur());
 			Deplacement deplSynchro = new DeplSynchronisation(redescendre);
 			Deplacement nextDepl = new MonteSurfacePourSynchro(deplSynchro);
 			this.setDeplacement(nextDepl);
-			this.resetData();
+			this.isCollectingData = false;
 		}
-		this.isCollectingData = false;
 		super.tick();
 	}
 
+	/**
+	 *
+	 * @param arg
+	 */
 	@Override
 	public void whenSatelitteMoved(SatelliteMoved arg) {
 		DeplacementBalise dp = (DeplacementBalise) this.depl;
 		dp.whenSatelitteMoved(arg, this);
-		this.isCollectingData = true;
 	}
 
 

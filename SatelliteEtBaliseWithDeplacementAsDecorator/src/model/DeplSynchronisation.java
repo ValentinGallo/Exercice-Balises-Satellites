@@ -27,6 +27,7 @@ public class DeplSynchronisation extends DeplacementBalise {
 			this.synchro = sat;
 			target.send(new SynchroEvent(this));
 			this.synchro.send(new SynchroEvent(this));
+			target.resetData();
 		}
 	}
 
