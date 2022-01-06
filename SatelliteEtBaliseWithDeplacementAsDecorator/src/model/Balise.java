@@ -39,7 +39,7 @@ public class Balise extends ElementMobile implements SatelitteMoveListener{
 	 * Permet de lire les capteurs afin de collecter de la donnée
 	 */
 	protected void readSensors() {
-		this.dataSize++;
+		if(isCollectingData) this.dataSize++;
 	}
 
 	/**

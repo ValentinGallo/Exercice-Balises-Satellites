@@ -48,11 +48,13 @@ public class GrProgressIndicator extends GrElementMobile {
     }
 
     public File getProgressIndicatorFileToDisplay(Balise balise) {
-        File path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/0.png");;
+        File path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/0.png");
+
         if(balise.dataSize() >= balise.memorySize()/4) path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/25.png");
         if(balise.dataSize() >= balise.memorySize()/2) path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/50.png");
         if(balise.dataSize() >= ((balise.memorySize()/2) + (balise.memorySize()/4))) path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/75.png");
-        if(balise.dataSize() >= balise.memorySize()) path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/100.png");
+        if(balise.dataSize() == balise.memorySize()) path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/100.png");
+
         return path;
     }
 }
