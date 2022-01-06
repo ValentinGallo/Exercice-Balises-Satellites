@@ -2,12 +2,18 @@ package model;
 
 import events.SatelitteMoveListener;
 import events.SatelliteMoved;
+import views.GrProgressIndicator;
 
 /**
  * Class Balise qui hérite de ElementMobile et implémente l'interface SatelitteMoveListener
  * Elle communique avec les satellites
  */
 public class Balise extends ElementMobile implements SatelitteMoveListener{
+
+	/**
+	 * Instance de la barre de progression
+	 */
+	public GrProgressIndicator progressIndicator;
 
 	/**
 	 * Boolean qui précise si la balise est en collecte ou non
@@ -38,8 +44,10 @@ public class Balise extends ElementMobile implements SatelitteMoveListener{
 
 	/**
 	 * Fonction appelée à chaque tick qui permet de réaliser les actions et déplacements de la balise
+	 * Elle permet aussi de changer l'indicateur de progression de collecte de données
 	 */
 	public void tick() {
+		this.progressIndicator.changeProgressIndicator(this);
 		this.readSensors();
 		if (this.memoryFull() && isCollectingData) {
 			Deplacement redescendre = new Redescendre(this.deplacement(), this.profondeur());

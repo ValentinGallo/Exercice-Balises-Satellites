@@ -24,9 +24,7 @@ import model.Manager;
 import model.Satellite;
 import nicellipse.component.NiRectangle;
 import nicellipse.component.NiSpace;
-import views.GrBalise;
-import views.GrEther;
-import views.GrSatellite;
+import views.*;
 
 public class Simulation {
 	//Variables de l'environnement
@@ -91,6 +89,7 @@ public class Simulation {
 		GrBalise grbal = new GrBalise(this.ether);
 		grbal.setModel(bal);
 		sea.add(grbal);
+		this.initializeProgressIndicator(bal, sea, grbal);
 	}
 
 	public void addSatelitte(JPanel sky, int memorySize, Point startPos, int vitesse) {
@@ -101,6 +100,13 @@ public class Simulation {
 		GrSatellite grSat = new GrSatellite(this.ether);
 		grSat.setModel(sat);
 		sky.add(grSat);
+	}
+
+	public void initializeProgressIndicator(Balise balise, JPanel sea, GrBalise grbal) {
+		GrProgressIndicator initialProgress = new GrProgressIndicator(this.ether, grbal.getSize());
+		initialProgress.setModel(balise);
+		balise.progressIndicator = initialProgress;
+		sea.add(initialProgress);
 	}
 
 	public void launch() {
