@@ -40,8 +40,8 @@ public class Balise extends ElementMobile implements SatelitteMoveListener{
 	}
 
 	/**
-	 *
-	 * @param arg
+	 * Fonction permettant d'appeler la fonction whenSatelitteMoved() du déplacement
+	 * @param arg Satellite
 	 */
 	@Override
 	public void whenSatelitteMoved(SatelliteMoved arg) {

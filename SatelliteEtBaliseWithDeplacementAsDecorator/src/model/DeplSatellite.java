@@ -2,6 +2,9 @@ package model;
 
 import java.awt.Point;
 
+/**
+ * Class permettant de gérer les déplacements de satellite qui hérite de la classe générique "Deplacement"
+ */
 public class DeplSatellite extends Deplacement {
 	Integer start;
 	Integer end;

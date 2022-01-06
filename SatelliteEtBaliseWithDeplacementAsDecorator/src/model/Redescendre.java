@@ -2,6 +2,9 @@ package model;
 
 import java.awt.Point;
 
+/**
+ * Class permettant le déplacement de la balise pour redescendre au fond de l'eau héritant de "DeplacementBalise"
+ */
 public class Redescendre extends DeplacementBalise {
 	int profondeur;
 	

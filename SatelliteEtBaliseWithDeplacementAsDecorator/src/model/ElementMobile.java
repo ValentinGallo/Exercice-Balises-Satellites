@@ -6,6 +6,9 @@ import eventHandler.AbstractEvent;
 import eventHandler.EventHandler;
 import events.PositionChanged;
 
+/**
+ * Class mère des éléments mobiles de la simulation (Satellite ou Balise)
+ */
 public class ElementMobile {
 	Deplacement depl;
 	Point position;

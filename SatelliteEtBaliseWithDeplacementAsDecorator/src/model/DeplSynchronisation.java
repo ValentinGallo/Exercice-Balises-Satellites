@@ -3,6 +3,10 @@ package model;
 import events.SatelliteMoved;
 import events.SynchroEvent;
 
+/**
+ * Class permettant le déplacement synchronisé des balises héritant de "DeplacementBalise"
+ * avec un temps de synchronisation de 10 ticks
+ */
 public class DeplSynchronisation extends DeplacementBalise {
 	private int synchroTime;
 	private Satellite synchro;

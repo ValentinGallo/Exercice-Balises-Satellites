@@ -2,6 +2,9 @@ package model;
 
 import java.awt.Point;
 
+/**
+ * Class permettant le déplacement horizontal des balises héritant de "DeplacementBalise"
+ */
 public class DeplHorizontal extends DeplacementBalise {
 	Integer start;
 	Integer end;
@@ -12,7 +15,11 @@ public class DeplHorizontal extends DeplacementBalise {
 		this.start = start;
 		this.end = end;
 	}
-	
+
+	/**
+	 * Fonction qui déplace la balise horizontalement
+	 * @param target ElementMobile à déplacer horizontalement
+	 */
 	@Override
 	public void bouge(ElementMobile target) {
 		Point p = target.getPosition();

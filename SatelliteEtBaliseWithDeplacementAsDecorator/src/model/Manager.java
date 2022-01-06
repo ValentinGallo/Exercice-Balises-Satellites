@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import events.SatelliteMoved;
 
+/**
+ * Class permettant de gérer les satellites et balises de la simulation
+ */
 public class Manager {
 	ArrayList<Satellite> sats = new ArrayList<Satellite>();
 	ArrayList<Balise> bals = new ArrayList<Balise>();

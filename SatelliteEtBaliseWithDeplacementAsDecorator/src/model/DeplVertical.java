@@ -2,6 +2,9 @@ package model;
 
 import java.awt.Point;
 
+/**
+ * Class permettant le déplacement vertical des balises héritant de "DeplacementBalise"
+ */
 public class DeplVertical extends DeplacementBalise  {
 	Integer min;
 	Integer max;
@@ -12,7 +15,11 @@ public class DeplVertical extends DeplacementBalise  {
 		this.min = min;
 		this.max = max;
 	}
-	
+
+	/**
+	 * Fonction qui déplace la balise verticalement
+	 * @param target ElementMobile à déplacer verticalement
+	 */
 	@Override
 	public void bouge(ElementMobile target) {
 		Point p = target.getPosition();

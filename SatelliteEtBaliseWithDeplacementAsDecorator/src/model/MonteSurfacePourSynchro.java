@@ -2,6 +2,9 @@ package model;
 
 import java.awt.Point;
 
+/**
+ * Class de déplacement permettant à la balise de remonter à la surface pour synchroniser la balise avec un satellite héritant de "DeplacementBalise"
+ */
 public class MonteSurfacePourSynchro extends DeplacementBalise {
 	
 	public MonteSurfacePourSynchro(Deplacement next) {
