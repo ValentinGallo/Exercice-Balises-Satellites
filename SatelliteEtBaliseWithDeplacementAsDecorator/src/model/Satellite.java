@@ -7,7 +7,11 @@ import events.SatelliteMoved;
  * Il communique avec les balises
  */
 public class Satellite extends ElementMobile {
-			
+
+	/**
+	 * Constructeur du satellite
+	 * @param memorySize Quantité de données que peut transmettre la satellite
+	 */
 	public Satellite(int memorySize) {
 		super(memorySize);
 	}

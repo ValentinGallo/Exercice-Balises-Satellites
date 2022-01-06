@@ -9,6 +9,9 @@ import javax.imageio.ImageIO;
 
 import nicellipse.component.NiImage;
 
+/**
+ * Class GrBalise qui permet de gérer l'aspect d'un satellite
+ */
 public class GrSatellite extends GrElementMobile {
 	private static final long serialVersionUID = -8534493300853878234L;
 

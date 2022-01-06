@@ -9,6 +9,9 @@ import javax.imageio.ImageIO;
 
 import nicellipse.component.NiImage;
 
+/**
+ * Class GrBalise qui permet de gérer l'aspect de la balise
+ */
 public class GrBalise extends GrElementMobile {
 	private static final long serialVersionUID = -8672390241177685075L;
 

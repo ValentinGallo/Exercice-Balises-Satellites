@@ -1,9 +1,9 @@
 # Exercice Balises / Satellites
-## Valentin Gallo | Pierre Le Brun
+Valentin Gallo | Pierre Le Brun (Master TIIL-A)
 
-## Correction du bug
-
-## Ameliorations réalisées
+## Correction du bug :
+Le bug
+## Ameliorations réalisées :
 
 - 1
 - 2
@@ -11,3 +11,6 @@
 - 4
 - 5
 
+## Diagramme UML :
+
+![UML](https://i.imgur.com/O0ACj0F.png)

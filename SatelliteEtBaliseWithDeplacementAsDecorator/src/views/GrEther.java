@@ -11,6 +11,9 @@ import java.util.List;
 
 import nicellipse.component.NiRectangle;
 
+/**
+ * Class GrEther permettant d'afficher les communication entre les balises et satellites
+ */
 public class GrEther extends NiRectangle {
 	private static final long serialVersionUID = -7500849956681054391L;
 

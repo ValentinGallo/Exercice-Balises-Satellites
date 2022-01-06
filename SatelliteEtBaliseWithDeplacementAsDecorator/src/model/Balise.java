@@ -9,17 +9,29 @@ import events.SatelliteMoved;
  */
 public class Balise extends ElementMobile implements SatelitteMoveListener{
 
-	// Boolean qui précise si la balise est en collecte ou non
+	/**
+	 * Boolean qui précise si la balise est en collecte ou non
+	 */
 	boolean isCollectingData = true;
-	
+
+	/**
+	 * Constructeur de la Balise
+	 * @param memorySize Quantité de données que peut transmettre la balise
+	 */
 	public Balise(int memorySize) {
 		super(memorySize);
 	}
-	
+
+	/**
+	 * @return renvoie la profondeur
+	 */
 	public int profondeur() { 
 		return this.getPosition().y; 
 	}
-	
+
+	/**
+	 * Permet de lire les capteurs afin de collecter de la donnée
+	 */
 	protected void readSensors() {
 		this.dataSize++;
 	}
@@ -41,7 +53,7 @@ public class Balise extends ElementMobile implements SatelitteMoveListener{
 
 	/**
 	 * Fonction permettant d'appeler la fonction whenSatelitteMoved() du déplacement
-	 * @param arg Satellite
+	 * @param arg SatelliteMoved
 	 */
 	@Override
 	public void whenSatelitteMoved(SatelliteMoved arg) {
