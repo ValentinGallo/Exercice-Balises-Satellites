@@ -32,6 +32,7 @@ public class DeplSynchronisation extends DeplacementBalise {
 			target.send(new SynchroEvent(this));
 			this.synchro.send(new SynchroEvent(this));
 			target.resetData();
+			synchro.getData(target.memorySize);
 		}
 	}
 

@@ -1,8 +1,6 @@
 package simulation;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,6 +20,7 @@ import model.DeplVertical;
 import model.Deplacement;
 import model.Manager;
 import model.Satellite;
+import nicellipse.component.NiLabel;
 import nicellipse.component.NiRectangle;
 import nicellipse.component.NiSpace;
 import views.*;
@@ -33,16 +32,25 @@ public class Simulation {
 	final int FPS_INIT = 10;
 	final int startDelay = 500 / FPS_INIT;
 	Timer animation;
+	NiLabel label;
 	Manager manager = new Manager();
 	Dimension worldDim = new Dimension(900, 700);
 	NiSpace world = new NiSpace("Satellite & Balises", this.worldDim);
 	GrEther ether = new GrEther();
 
+
 	public void animation() {
 		ActionListener taskPerformer = new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				manager.tick();
-				ether.repaint();		
+				this.refreshCounterDataCollected();
+				ether.repaint();
+
+			}
+
+			public void refreshCounterDataCollected(){
+				int actualValue = Integer.parseInt(label.getText().split(":")[1]);
+				if(manager.getTotalDataCollected() != actualValue)label.setText("Total données collectées:" +manager.getTotalDataCollected());
 			}
 		};
 		this.animation = new Timer(this.startDelay, taskPerformer);
@@ -120,6 +128,7 @@ public class Simulation {
 		this.ether.setDimension(this.worldDim);
 
 		NiRectangle sky = new NiRectangle();
+		addCounterDataCollected(sky);
 		sky.setBackground(Color.white);
 		sky.setDimension(new Dimension(this.worldDim.width, this.worldDim.height / 2));
 		NiRectangle sea = new NiRectangle();
@@ -146,6 +155,13 @@ public class Simulation {
 		this.world.add(this.fpsSliderPanel());
 		this.world.openInWindow();
 		this.animation();
+	}
+
+	public void addCounterDataCollected(JPanel sky) {
+		label = new NiLabel("Total données collectées:0");
+		label.setForeground(Color.black);
+		label.setFont(new Font("Arial", Font.BOLD, 20));
+		sky.add(label);
 	}
 
 	public static void main(String[] args) {

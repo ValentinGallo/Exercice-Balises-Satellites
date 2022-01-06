@@ -48,13 +48,15 @@ public class Balise extends ElementMobile implements SatelitteMoveListener{
 	 */
 	public void tick() {
 		this.progressIndicator.changeProgressIndicator(this);
-		this.readSensors();
-		if (this.memoryFull() && isCollectingData) {
-			Deplacement redescendre = new Redescendre(this.deplacement(), this.profondeur());
-			Deplacement deplSynchro = new DeplSynchronisation(redescendre);
-			Deplacement nextDepl = new MonteSurfacePourSynchro(deplSynchro);
-			this.setDeplacement(nextDepl);
-			this.isCollectingData = false;
+		if (isCollectingData) {
+			this.readSensors();
+			if(this.memoryFull()) {
+				Deplacement redescendre = new Redescendre(this.deplacement(), this.profondeur());
+				Deplacement deplSynchro = new DeplSynchronisation(redescendre);
+				Deplacement nextDepl = new MonteSurfacePourSynchro(deplSynchro);
+				this.setDeplacement(nextDepl);
+				this.isCollectingData = false;
+			}
 		}
 		super.tick();
 	}

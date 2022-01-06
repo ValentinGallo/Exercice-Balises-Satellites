@@ -11,14 +11,21 @@ Le bug
 
 Nous avons remarqué que les balises récupéraient des données à chaque
 tick même quand elle occupé à remonter à la surface (donc 350 dataSize /300 memorySize était possibles)
-![ReadSensor()](images/Fix_ReadSensors.png)
+```java
+pred void readSensors() {
+        if(isCollectingData) this.dataSize++;otect
+}
+```
+_Corrigé en vérifiant si la balise collecte des données_
 
 - ### Ajout d'un indicateur de progression sur les balises
 
-Permet d'afficher le pourcentage de données collectées par une balise :
 ![balise](images/balise.png)
 
-- 3
+_Permet d'afficher le pourcentage de données collectées par une balise_
+
+- ### 
+
 - 4
 - 5
 

@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 
 import events.SatelliteMoved;
+import nicellipse.component.NiLabel;
 
 /**
  * Class permettant de gérer les satellites et balises de la simulation
@@ -37,6 +38,14 @@ public class Manager {
 		for (Satellite s : this.sats) {			
 			s.unregisterListener(SatelliteMoved.class, b);
 		}
+	}
+
+	public int getTotalDataCollected(){
+		int total = 0;
+		for (Satellite s : this.sats) {
+			total += s.dataSize;
+		}
+		return total;
 	}
 
 }
