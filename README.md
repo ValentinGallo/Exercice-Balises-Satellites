@@ -24,8 +24,11 @@ _Corrigé en vérifiant si la balise collecte des données_
 
 _Permet d'afficher le pourcentage de données collectées par une balise_
 
-- ### 
+- ### Ajout d'un compteur
 
+![compteur](images/compteur.png)
+
+_Affiche le nombre total de données récupéré par les satellites_
 - 4
 - 5
 
