@@ -8,7 +8,9 @@ Valentin Gallo | Pierre Le Brun (Master TIIL-A)
 Le problème qui intervient suite à l'exécution du programme concerne les balises qui peuvent
 rester bloquées à la surface.
 
-La balise effectue une réinitialisation de ses données pendant son déplacement ce qui...
+La balise effectue une réinitialisation de ses données pendant qu'elle remonte à la surface et redémarre la collecte.
+
+
 
 ### Correctif
 
@@ -45,6 +47,8 @@ public void bouge(Balise target) {
 
 ## Ameliorations réalisées :
 
+- ### 
+
 - ### Les balises collectaient trop de données
 
 Nous avons remarqué que les balises récupéraient des données à chaque
@@ -64,18 +68,21 @@ public void tick() {
     super.tick();
 }
 ```
-_Corrigé en vérifiant si la balise collecte des données_
+_Corrigé en appelant la méthode readSensors() vérifiant si la balise collecte des données_
 
 - ### Ajout d'indicateurs de progression
 
-![indicateur](images/indicateur.gif)
+Permet d'afficher le pourcentage de données collectées sur la mémoire totale d'un **elementMobile**.
 
-_Permet d'afficher le pourcentage de données collectées par un elementMobile_
-_(une balise, un satellite, une antenne)._
+![indicateur](images/indicateur_balise.gif)
+![indicateur](images/indicateur_satellite.gif)
+![indicateur](images/indicateur_antenne.gif)
+
+_Implémenté pour les balises, les satellites et les antennes._
 
 - ### Ajout d'antennes
 
-![indicateur](images/antenne.gif)
+GIF DE L'ANTENNE QUI COMMUNIQUE EN ROUGE A AJOUTER
 
 _Permet de récupérer les données d'un satellite lorsque celui passe au dessus._
 
@@ -83,7 +90,17 @@ _Permet de récupérer les données d'un satellite lorsque celui passe au dessus
 
 ![compteur](images/compteur.gif)
 
-_Affiche le nombre total de données récupéré par les balises, satellites et antennes._
+_Affiche le nombre total de données récupéré par l'ensemble des balises, satellites et antennes._
+
+- ### Le déplacement de synchronisation est devenu générique
+
+Afin d'utiliser un déplacement de synchronisation pour l'antenne, nous avons rendu le déplacement
+de synchronisation initialement prévu pour la balise génrérique.
+
+Désormais les classes _DeplSyncAntenne_ et _DeplSyncBalise_ hérite de **DeplSynchronisation**
+
+- ### Visiteur
+
 
 - ### Création d'une java-doc
 
