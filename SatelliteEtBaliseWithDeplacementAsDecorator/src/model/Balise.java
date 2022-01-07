@@ -2,7 +2,6 @@ package model;
 
 import events.SatelitteMoveListener;
 import events.SatelliteMoved;
-import views.GrProgressIndicator;
 
 /**
  * Class Balise qui hérite de ElementMobile et implémente l'interface SatelitteMoveListener
@@ -34,7 +33,7 @@ public class Balise extends ElementMobile implements SatelitteMoveListener{
 	 * Permet de lire les capteurs afin de collecter de la donnée
 	 */
 	protected void readSensors() {
-		if(isCollectingData) this.dataSize++;
+		this.dataSize++;
 	}
 
 	/**
@@ -46,7 +45,7 @@ public class Balise extends ElementMobile implements SatelitteMoveListener{
 			this.readSensors();
 			if(this.memoryFull()) {
 				Deplacement redescendre = new Redescendre(this.deplacement(), this.profondeur());
-				Deplacement deplSynchro = new DeplSynchronisation(redescendre);
+				Deplacement deplSynchro = new DeplSyncBalise(redescendre);
 				Deplacement nextDepl = new MonteSurfacePourSynchro(deplSynchro);
 				this.setDeplacement(nextDepl);
 				this.isCollectingData = false;

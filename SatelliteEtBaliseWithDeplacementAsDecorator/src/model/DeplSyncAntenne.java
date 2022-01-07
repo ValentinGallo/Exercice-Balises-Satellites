@@ -9,9 +9,9 @@ import model.ElementMobile;
 /**
  * Class permettant de gérer les déplacements de balises qui hérite de la classe générique "Deplacement"
  */
-public class DeplSyncAntenne extends DeplacementAntenne {
+public class DeplSyncAntenne extends DeplacementAntenne implements DeplSynchronisation {
     private int synchroTime;
-    private Antenne synchro;
+    private Satellite synchro;
 
     public Boolean synchroStarted() {
         return this.synchro != null;
@@ -29,22 +29,27 @@ public class DeplSyncAntenne extends DeplacementAntenne {
         Satellite sat = (Satellite) arg.getSource();
         int satX = sat.getPosition().x;
         int tarX = target.getPosition().x;
-        if (satX > tarX - 10 && satX < tarX + 10 && !target.memoryFull()) {
+        if (satX > tarX - 10 && satX < tarX + 10 && sat.dataSize > 0 && !target.memoryFull()) {
+            this.synchro = sat;
+            target.send(new SynchroEvent(this));
+            this.synchro.send(new SynchroEvent(this));
             sat.sendData(target);
         }
     }
 
+
     @Override
-    public void bouge(Antenne target) {
+    public void bouge(ElementMobile target) {
         if (this.synchro == null) return;
         this.synchroTime--;
         if (synchroTime <= 0) {
-            Antenne sat = this.synchro;
+            Satellite sat = this.synchro;
             this.synchro = null;
             this.synchroTime = 10;
             target.send(new SynchroEvent(this));
             sat.send(new SynchroEvent(this));
-            target.setDeplacement(next);
+            target.getManager().antenneSynchroDone(((Antenne) target));
+            target.setDeplacement(this);
         }
     }
 }

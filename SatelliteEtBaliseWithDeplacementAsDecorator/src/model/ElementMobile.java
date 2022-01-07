@@ -1,11 +1,12 @@
 package model;
 
-import java.awt.Point;
+import java.awt.*;
 
 import eventHandler.AbstractEvent;
 import eventHandler.EventHandler;
 import events.PositionChanged;
 import events.SatelliteMoved;
+import views.GrElementMobile;
 import views.GrProgressIndicator;
 
 /**

@@ -22,9 +22,7 @@ public class Antenne extends ElementMobile implements SatelitteMoveListener {
      * Elle permet aussi de changer l'indicateur de progression de collecte de données
      */
     public void tick() {
-        Deplacement mouv = new DeplacementAntenne(new DeplHorizontal(-2, 2));
-        Deplacement deplSynchro = new DeplSyncAntenne(mouv);
-        this.setDeplacement(deplSynchro);
+        this.getManager().antenneReadyForSynchro(this);
         super.tick();
     }
 
@@ -34,7 +32,7 @@ public class Antenne extends ElementMobile implements SatelitteMoveListener {
      */
     @Override
     public void whenSatelitteMoved(SatelliteMoved arg) {
-        DeplacementAntenne dp = (DeplacementAntenne) this.depl;
+        DeplSyncAntenne dp = (DeplSyncAntenne) this.depl;
         dp.whenSatelitteMoved(arg, this);
     }
 

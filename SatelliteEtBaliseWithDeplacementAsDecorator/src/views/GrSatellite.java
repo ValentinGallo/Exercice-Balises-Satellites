@@ -1,12 +1,13 @@
 package views;
 
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import model.VisitorColor;
 import nicellipse.component.NiImage;
 
 /**
@@ -14,6 +15,10 @@ import nicellipse.component.NiImage;
  */
 public class GrSatellite extends GrElementMobile {
 	private static final long serialVersionUID = -8534493300853878234L;
+
+	public Color accept(VisitorColor v) {
+		return v.visit(this);
+	}
 
 	public GrSatellite(GrEther ether) {
 		super(ether);

@@ -1,6 +1,5 @@
 package views;
 
-import model.Balise;
 import model.ElementMobile;
 import nicellipse.component.NiImage;
 

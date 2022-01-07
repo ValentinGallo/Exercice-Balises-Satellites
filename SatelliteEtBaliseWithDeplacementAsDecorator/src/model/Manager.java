@@ -23,7 +23,6 @@ public class Manager {
 	}
 	public void addAntenne(Antenne ant) {
 		this.ants.add(ant);
-		this.antenneReadyForSynchro(ant);
 		ant.setManager(this);
 	}
 	public void tick() {
@@ -53,6 +52,12 @@ public class Manager {
 	public void antenneReadyForSynchro(Antenne a) {
 		for (Satellite s : this.sats) {
 			s.registerListener(SatelliteMoved.class, a);
+		}
+	}
+
+	public void antenneSynchroDone(Antenne a) {
+		for (Satellite s : this.sats) {
+			s.unregisterListener(SatelliteMoved.class, a);
 		}
 	}
 

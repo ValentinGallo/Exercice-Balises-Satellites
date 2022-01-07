@@ -1,6 +1,7 @@
 package events;
 
 import eventHandler.AbstractEvent;
+import model.DeplSyncBalise;
 import model.DeplSynchronisation;
 
 public class SynchroEvent extends AbstractEvent {

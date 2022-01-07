@@ -9,6 +9,8 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Visitable;
+import model.VisitorColor;
 import nicellipse.component.NiRectangle;
 
 /**
@@ -37,7 +39,7 @@ public class GrEther extends NiRectangle {
 		Point l = e.getParent().getLocation();
 		l.x += e.getLocation().x;
 		l.y += e.getLocation().y;
-		g.setColor(Color.ORANGE);
+			g.setColor(e.accept(new VisitorColor()));
 		g.setStroke(new BasicStroke(2));
 		for (int i = 10; i < 150; i += 25) {
 			g.drawOval(l.x-i,l.y-i,bounds.width+i+i,bounds.height+i+i);
@@ -54,6 +56,4 @@ public class GrEther extends NiRectangle {
 		}
 		g2d.dispose();
 	}
-
-	
 }
