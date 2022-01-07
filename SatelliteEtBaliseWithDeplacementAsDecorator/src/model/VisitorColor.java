@@ -14,7 +14,7 @@ public class VisitorColor {
     }
 
     public Color visit(GrSatellite grSatellite) {
-        return Color.ORANGE;
+        return Color.BLUE;
     }
 
     public Color visit(GrBalise grBalise) {

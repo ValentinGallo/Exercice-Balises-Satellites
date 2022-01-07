@@ -101,6 +101,32 @@ Désormais les classes _DeplSyncAntenne_ et _DeplSyncBalise_ hérite de **DeplSy
 
 - ### Visiteur
 
+Lors de l'implémentation des antennes, nous avons également eu l'idée de changer la couleur des ondes
+pour chaque type d'élément synchonisable. Nous avons donc implémenté un visiteur qui va visiter
+le GrElement appelé lors de l'affichage du contour et c'est celui ci qui va connaitre sa couleur via le visiteur.
+
+```java
+public class VisitorColor {
+    public Color visit(GrAntenne grAntenne) { return Color.RED; }
+    public Color visit(GrSatellite grSatellite) { return Color.BLUE; }
+    public Color visit(GrBalise grBalise) { return Color.ORANGE; }
+}
+```
+```java
+Dans la classe GrEther :
+
+public void paintSynchronisation(Graphics2D g, GrElementMobile e) {
+        Rectangle bounds = e.getBounds();
+        Point l = e.getParent().getLocation();
+        l.x += e.getLocation().x;
+        l.y += e.getLocation().y;
+        ----> g.setColor(e.accept(new VisitorColor()));
+        g.setStroke(new BasicStroke(2));
+        for (int i = 10; i < 150; i += 25) {
+            g.drawOval(l.x-i,l.y-i,bounds.width+i+i,bounds.height+i+i);
+        }
+}
+```
 
 - ### Création d'une java-doc
 
