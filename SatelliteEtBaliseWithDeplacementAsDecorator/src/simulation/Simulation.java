@@ -100,10 +100,10 @@ public class Simulation {
 		this.initializeProgressIndicator(sat, grSat);
 	}
 
-	public void addAntenne(JPanel sky, int memorySize, Point startPos, Deplacement depl) {
+	public void addAntenne(JPanel sky, int memorySize, Point startPos) {
 		Antenne ant = new Antenne(memorySize);
 		ant.setPosition(startPos);
-		ant.setDeplacement(new DeplSyncAntenne(depl));
+		ant.setDeplacement(new DeplSyncAntenne());
 		manager.addAntenne(ant);
 		GrAntenne grAnt = new GrAntenne(this.ether);
 		grAnt.setModel(ant);
@@ -146,8 +146,8 @@ public class Simulation {
 		this.addBalise(sea, 400, new Point(0, 160), new DeplHorizontal(0, 800));
 		this.addBalise(sea, 70, new Point(200, 100), new DeplVertical(130, 270));
 		this.addBalise(sea, 160, new Point(300, 100), new DeplHorizontal(200, 600));
-		this.addAntenne(sky, 700, new Point(750, 260), new DeplHorizontal(748, 752));
-		this.addAntenne(sky, 700, new Point(40, 260), new DeplHorizontal(38, 42));
+		this.addAntenne(sky, 700, new Point(750, 260));
+		this.addAntenne(sky, 700, new Point(40, 260));
 
 		main.add(sky, JLayeredPane.DEFAULT_LAYER);
 		main.add(sea, JLayeredPane.DEFAULT_LAYER);

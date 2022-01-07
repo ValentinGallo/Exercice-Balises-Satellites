@@ -1,9 +1,10 @@
 package model;
 
-import views.GrElementMobile;
-
 import java.awt.*;
 
+/**
+ * Interface de classe Visitable
+ */
 public interface Visitable {
     public Color accept(VisitorColor v);
 }

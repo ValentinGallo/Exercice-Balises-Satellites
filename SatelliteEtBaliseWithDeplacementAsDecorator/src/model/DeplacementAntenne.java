@@ -3,15 +3,13 @@ package model;
 import events.SatelliteMoved;
 
 /**
- * Class permettant de gérer les déplacements de balises qui hérite de la classe générique "Deplacement"
+ * Class permettant de gérer les déplacements d'antenne qui hérite de la classe générique "Deplacement"
  */
 public class DeplacementAntenne extends Deplacement {
 
     protected Deplacement next;
 
-    public DeplacementAntenne (Deplacement next) {
-        this.next = next;
-    }
+    public DeplacementAntenne() {}
 
     public void bouge(Antenne target) {
     }

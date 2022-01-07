@@ -7,8 +7,10 @@ import views.GrSatellite;
 
 import java.awt.*;
 
+/**
+ * Visiteur qui retourne la couleur associé à l'élément graphique
+ */
 public class VisitorColor {
-
     public Color visit(GrAntenne grAntenne) {
         return Color.RED;
     }

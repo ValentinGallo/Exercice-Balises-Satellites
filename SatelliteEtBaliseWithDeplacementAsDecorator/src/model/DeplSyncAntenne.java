@@ -2,12 +2,9 @@ package model;
 
 import events.SatelliteMoved;
 import events.SynchroEvent;
-import model.Balise;
-import model.Deplacement;
-import model.ElementMobile;
 
 /**
- * Class permettant de gérer les déplacements de balises qui hérite de la classe générique "Deplacement"
+ * Class permettant de gérer les déplacements d'antenne qui hérite de la classe générique "Deplacement"
  */
 public class DeplSyncAntenne extends DeplacementAntenne implements DeplSynchronisation {
     private int synchroTime;
@@ -17,8 +14,8 @@ public class DeplSyncAntenne extends DeplacementAntenne implements DeplSynchroni
         return this.synchro != null;
     }
 
-    public DeplSyncAntenne(Deplacement next) {
-        super(next);
+    public DeplSyncAntenne() {
+        super();
         this.synchroTime = 10;
         this.synchro = null;
     }

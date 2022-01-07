@@ -5,7 +5,7 @@ import events.SatelliteMoved;
 
 /**
  * Class Antenne qui hérite de ElementMobile
- * Il communique avec les satellites
+ * Elle communique avec les satellites
  */
 public class Antenne extends ElementMobile implements SatelitteMoveListener {
 
@@ -18,8 +18,7 @@ public class Antenne extends ElementMobile implements SatelitteMoveListener {
     }
 
     /**
-     * Fonction appelée à chaque tick qui permet de réaliser les actions et déplacements de la balise
-     * Elle permet aussi de changer l'indicateur de progression de collecte de données
+     * Fonction appelée à chaque tick qui permet de lancer la synchronisation des antennes
      */
     public void tick() {
         this.getManager().antenneReadyForSynchro(this);
