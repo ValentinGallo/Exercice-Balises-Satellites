@@ -26,9 +26,9 @@ public class Simulation {
 	final int FPS_INIT = 10;
 	final int startDelay = 500 / FPS_INIT;
 	Timer animation;
-	NiLabel label;
+	NiLabel labelCounterSatellite,labelCounterBalises,labelCounterAntenne;
 	Manager manager = new Manager();
-	Dimension worldDim = new Dimension(900, 700);
+	Dimension worldDim = new Dimension(900, 800);
 	NiSpace world = new NiSpace("Satellite & Balises", this.worldDim);
 	GrEther ether = new GrEther();
 
@@ -37,14 +37,9 @@ public class Simulation {
 		ActionListener taskPerformer = new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				manager.tick();
-				this.refreshCounterDataCollected();
+				manager.refreshCounterDataCollected(labelCounterBalises,labelCounterSatellite,labelCounterAntenne);
 				ether.repaint();
 
-			}
-
-			public void refreshCounterDataCollected(){
-				int actualValue = Integer.parseInt(label.getText().split(":")[1]);
-				if(manager.getTotalDataCollected() != actualValue)label.setText("Total données collectées:" +manager.getTotalDataCollected());
 			}
 		};
 		this.animation = new Timer(this.startDelay, taskPerformer);
@@ -134,13 +129,14 @@ public class Simulation {
 		this.ether.setDimension(this.worldDim);
 
 		NiRectangle sky = new NiRectangle();
-		addCounterDataCollected(sky);
 		sky.setBackground(Color.white);
-		sky.setDimension(new Dimension(this.worldDim.width, this.worldDim.height / 2));
+		sky.setDimension(new Dimension(this.worldDim.width, (this.worldDim.height-100) / 2));
 		NiRectangle sea = new NiRectangle();
 		sea.setBackground(Color.blue);
-		sea.setDimension(new Dimension(this.worldDim.width, this.worldDim.height / 2));
-		sea.setLocation(new Point(0, this.worldDim.height / 2));
+		sea.setDimension(new Dimension(this.worldDim.width, (this.worldDim.height-100) / 2));
+		sea.setLocation(new Point(0, 700 / 2));
+
+		this.addScoreBoard(main);
 
 		this.addSatelitte(sky, 200, new Point(10, 50), 2);
 		this.addSatelitte(sky, 200, new Point(100, 10), 1);
@@ -154,6 +150,7 @@ public class Simulation {
 		this.addBalise(sea, 160, new Point(300, 100), new DeplHorizontal(200, 600));
 		this.addAntenne(sky, 500, new Point(800, 260), 1);
 		this.addAntenne(sky, 500, new Point(10, 260), 1);
+
 		main.add(sky, JLayeredPane.DEFAULT_LAYER);
 		main.add(sea, JLayeredPane.DEFAULT_LAYER);
 		main.add(this.ether, JLayeredPane.POPUP_LAYER);
@@ -165,11 +162,34 @@ public class Simulation {
 		this.animation();
 	}
 
-	public void addCounterDataCollected(JPanel sky) {
-		label = new NiLabel("Total données collectées:0");
-		label.setForeground(Color.black);
-		label.setFont(new Font("Arial", Font.BOLD, 20));
-		sky.add(label);
+	public void addScoreBoard(JLayeredPane main) {
+		//ScoreBoard
+		NiRectangle score = new NiRectangle();
+		score.setBackground(Color.orange);
+		score.setDimension(new Dimension(this.worldDim.width, 100));
+		score.setLocation(new Point(0, (this.worldDim.height-100)));
+
+		//labelCounterBalises
+		labelCounterBalises = new NiLabel("[Balises] Total données:0");
+		labelCounterBalises.setForeground(Color.black);
+		labelCounterBalises.setFont(new Font("Arial", Font.BOLD, 20));
+		score.add(labelCounterBalises);
+
+		//labelCounterSatellite
+		labelCounterSatellite = new NiLabel("[Satellites] Total données:0");
+		labelCounterSatellite.setForeground(Color.black);
+		labelCounterSatellite.setFont(new Font("Arial", Font.BOLD, 20));
+		labelCounterSatellite.setLocation(new Point(0, 20));
+		score.add(labelCounterSatellite);
+
+		//LabelAntennes
+		labelCounterAntenne = new NiLabel("[Antennes] Total données:0");
+		labelCounterAntenne.setForeground(Color.black);
+		labelCounterAntenne.setFont(new Font("Arial", Font.BOLD, 20));
+		labelCounterAntenne.setLocation(new Point(0, 40));
+		score.add(labelCounterAntenne);
+
+		main.add(score);
 	}
 
 	public static void main(String[] args) {

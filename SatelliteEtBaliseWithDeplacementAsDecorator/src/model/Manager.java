@@ -56,10 +56,25 @@ public class Manager {
 		}
 	}
 
-	public int getTotalDataCollected(){
+	public void refreshCounterDataCollected(NiLabel labelBalises, NiLabel labelSatellites, NiLabel labelAntennes){
+		//Balies
+		String text = labelBalises.getText().split(":")[0];
+		String newText = text+":"+this.getTotalDataCollected(this.bals);
+		if(!newText.equals(labelBalises.getText()))labelBalises.setText(newText);
+
+		text = labelSatellites.getText().split(":")[0];
+		newText = text+":"+this.getTotalDataCollected(this.sats);
+		if(!newText.equals(labelSatellites.getText()))labelSatellites.setText(newText);
+
+		text = labelAntennes.getText().split(":")[0];
+		newText = text+":"+this.getTotalDataCollected(this.ants);
+		if(!newText.equals(labelAntennes.getText()))labelAntennes.setText(newText);
+	}
+
+	public int getTotalDataCollected(ArrayList<? extends ElementMobile>  list){
 		int total = 0;
-		for (Satellite s : this.sats) {
-			total += s.dataSize;
+		for (ElementMobile e : list) {
+			total += e.dataSize;
 		}
 		return total;
 	}
