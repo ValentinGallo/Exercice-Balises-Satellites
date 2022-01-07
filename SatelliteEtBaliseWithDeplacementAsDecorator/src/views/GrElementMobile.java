@@ -23,6 +23,12 @@ public class GrElementMobile extends NiRectangle implements PositionChangeListen
 		this.setOpaque(false);
 	}
 
+	public GrElementMobile() {
+		this.setBorder(null);
+		this.setBackground(null);
+		this.setOpaque(false);
+	}
+
 	Object getModel() { return this.model; }
 	
 	public void setModel(ElementMobile model) {

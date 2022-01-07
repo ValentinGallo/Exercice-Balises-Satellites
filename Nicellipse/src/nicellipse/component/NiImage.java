@@ -25,7 +25,9 @@ public class NiImage extends JComponent implements NiBasicComponent {
 		rawImage = ImageIO.read(path);
 		this.setImage(rawImage);
 	}
-	
+
+	public NiImage() {}
+
 	public void setImage(Image image) {
 		this.image = image;
 		int width = this.image.getWidth(null);

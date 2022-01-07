@@ -10,20 +10,21 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class GrProgressIndicator extends GrElementMobile {
+public class GrProgressIndicator extends NiImage {
 
-    public GrProgressIndicator(GrEther ether, Dimension parentDimension) {
-        super(ether);
+    public GrProgressIndicator(GrElementMobile elementMobile) {
+        super();
         File path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/0.png");
         BufferedImage rawImage = null;
         try {
             rawImage = ImageIO.read(path);
-            rawImage = this.resizeImage(rawImage, 20, ((int) parentDimension.getHeight()));
+            rawImage = this.resizeImage(rawImage, 20, elementMobile.getHeight());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.add(new NiImage(rawImage));
-        this.setDimension(new Dimension(((int) parentDimension.getWidth()), ((int) parentDimension.getHeight())));
+        this.setImage(rawImage);
+        this.setDimension(new Dimension(elementMobile.getWidth(), elementMobile.getHeight()));
+        elementMobile.add(this);
     }
 
     public BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) throws IOException {
@@ -35,14 +36,12 @@ public class GrProgressIndicator extends GrElementMobile {
     }
 
     public void changeProgressIndicator(ElementMobile element) {
-        this.remove(0);
-
         BufferedImage rawImage = null;
         try {
             File path = this.getProgressIndicatorFileToDisplay(element);
             rawImage = ImageIO.read(path);
             rawImage = this.resizeImage(rawImage, 20, ((int) this.getHeight()));
-            this.add(new NiImage(rawImage));
+            this.setImage(rawImage);
         } catch (IOException e) {
             e.printStackTrace();
         }

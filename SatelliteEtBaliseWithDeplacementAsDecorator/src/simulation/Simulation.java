@@ -86,7 +86,7 @@ public class Simulation {
 		GrBalise grbal = new GrBalise(this.ether);
 		grbal.setModel(bal);
 		sea.add(grbal);
-		this.initializeProgressIndicator(bal, sea, grbal);
+		this.initializeProgressIndicator(bal, grbal);
 	}
 
 	public void addSatelitte(JPanel sky, int memorySize, Point startPos, int vitesse) {
@@ -97,7 +97,7 @@ public class Simulation {
 		GrSatellite grSat = new GrSatellite(this.ether);
 		grSat.setModel(sat);
 		sky.add(grSat);
-		this.initializeProgressIndicator(sat, sky, grSat);
+		this.initializeProgressIndicator(sat, grSat);
 	}
 
 	public void addAntenne(JPanel sky, int memorySize, Point startPos, int vitesse) {
@@ -108,14 +108,12 @@ public class Simulation {
 		GrAntenne grAnt = new GrAntenne(this.ether);
 		grAnt.setModel(ant);
 		sky.add(grAnt);
-		this.initializeProgressIndicator(ant, sky, grAnt);
+		this.initializeProgressIndicator(ant, grAnt);
 	}
 
-	public void initializeProgressIndicator(ElementMobile balise, JPanel sea, GrElementMobile grbal) {
-		GrProgressIndicator initialProgress = new GrProgressIndicator(this.ether, grbal.getSize());
-		initialProgress.setModel(balise);
+	public void initializeProgressIndicator(ElementMobile balise, GrElementMobile grbal) {
+		GrProgressIndicator initialProgress = new GrProgressIndicator(grbal);
 		balise.progressIndicator = initialProgress;
-		sea.add(initialProgress);
 	}
 
 	public void launch() {
@@ -148,8 +146,8 @@ public class Simulation {
 		this.addBalise(sea, 400, new Point(0, 160), new DeplHorizontal(0, 800));
 		this.addBalise(sea, 70, new Point(200, 100), new DeplVertical(130, 270));
 		this.addBalise(sea, 160, new Point(300, 100), new DeplHorizontal(200, 600));
-		this.addAntenne(sky, 500, new Point(800, 260), 1);
-		this.addAntenne(sky, 500, new Point(10, 260), 1);
+		this.addAntenne(sky, 700, new Point(800, 260), 1);
+		this.addAntenne(sky, 700, new Point(10, 260), 1);
 
 		main.add(sky, JLayeredPane.DEFAULT_LAYER);
 		main.add(sea, JLayeredPane.DEFAULT_LAYER);
