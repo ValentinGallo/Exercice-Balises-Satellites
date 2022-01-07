@@ -10,8 +10,6 @@ rester bloquées à la surface.
 
 La balise effectue une réinitialisation de ses données pendant qu'elle remonte à la surface et redémarre la collecte.
 
-
-
 ### Correctif
 
 Nous avons ajouté un boolean qui permet de savoir si la balise collecte des données.
@@ -24,7 +22,9 @@ Le boolean est défini à faux lorsque la mémoire de la balise est remplie.
 
 ```java
 if(this.memoryFull()) {
+    ...
     this.isCollectingData = false;
+    ...
 }
 ```
 
@@ -46,8 +46,6 @@ public void bouge(Balise target) {
 ```
 
 ## Ameliorations réalisées :
-
-- ### 
 
 - ### Les balises collectaient trop de données
 
@@ -82,11 +80,34 @@ _Implémenté pour les balises, les satellites et les antennes._
 
 - ### Ajout d'antennes
 
-GIF DE L'ANTENNE QUI COMMUNIQUE EN ROUGE A AJOUTER
+Permet de récupérer les données d'un satellite lorsque celui-ci passe au-dessus.
 
-_Permet de récupérer les données d'un satellite lorsque celui passe au dessus._
+![antenne](images/antenne.gif)
+
+_Elle hérite d'un **elementMobile** et possède une taille mémoire, tout comme un satellite ou une balise._
+
+- ### Ajout de l'envoi partiel de données
+
+Désormais un **elementMobile** à la possibilité d'envoyer une partie de ses données si le receveur n'a pas
+la capacité de tout recevoir.
+
+```java
+protected void sendData(ElementMobile element) {
+    int availableData = element.getAvailableData();
+    int dataSend = this.dataSize;
+    
+    if(availableData > this.dataSize) this.resetData();
+    else {
+        this.dataSize -= availableData;
+        dataSend = availableData;
+    }
+    element.dataSize += dataSend;
+}
+```
 
 - ### Ajout d'un compteur
+
+Réalisé avec l'aide du manager qui a accès à l'ensemble des balises, satellites et antennes.
 
 ![compteur](images/compteur.gif)
 
@@ -99,11 +120,11 @@ de synchronisation initialement prévu pour la balise génrérique.
 
 Désormais les classes _DeplSyncAntenne_ et _DeplSyncBalise_ hérite de **DeplSynchronisation**
 
-- ### Visiteur
+- ### Colométrie des synchronisations via un Visiteur
 
 Lors de l'implémentation des antennes, nous avons également eu l'idée de changer la couleur des ondes
-pour chaque type d'élément synchonisable. Nous avons donc implémenté un visiteur qui va visiter
-le GrElement appelé lors de l'affichage du contour et c'est celui ci qui va connaitre sa couleur via le visiteur.
+pour chaque type d'élément synchronisable. Nous avons donc implémenté un visiteur qui va visiter
+le GrElement appelé lors de l'affichage du contour et c'est celui-ci qui va connaitre sa couleur via le visiteur.
 
 ```java
 public class VisitorColor {
@@ -112,21 +133,16 @@ public class VisitorColor {
     public Color visit(GrBalise grBalise) { return Color.ORANGE; }
 }
 ```
-```java
 Dans la classe GrEther :
-
+```java
 public void paintSynchronisation(Graphics2D g, GrElementMobile e) {
-        Rectangle bounds = e.getBounds();
-        Point l = e.getParent().getLocation();
-        l.x += e.getLocation().x;
-        l.y += e.getLocation().y;
-        ----> g.setColor(e.accept(new VisitorColor()));
-        g.setStroke(new BasicStroke(2));
-        for (int i = 10; i < 150; i += 25) {
-            g.drawOval(l.x-i,l.y-i,bounds.width+i+i,bounds.height+i+i);
-        }
+    ...
+    g.setColor(e.accept(new VisitorColor()));
+    ...
 }
 ```
+
+![compteur](images/color_synchro.png)
 
 - ### Création d'une java-doc
 
