@@ -5,11 +5,11 @@ Valentin Gallo | Pierre Le Brun (Master TIIL-A)
 
 ### Problème constaté
 
-Le problème qui intervient suite à l'exécution du programme concerne les balises qui peuvent
-rester bloquées à la surface.
+Le problème qui intervient suite à l'exécution du programme concerne les balises qui peuvent rester bloquées à la surface.
 
-La balise effectue une réinitialisation de ses données pendant qu'elle remonte à la surface et redémarre la collecte.
-Elle reste donc bloqué
+La balise collecte des données et lorsque sa mémoire est pleine elle commence sa remontée pour se synchroniser avec un satellite. 
+Le problème était que la mémoire se vide directement lorsque la mémoire de la balise est pleine alors qu'elle devrait se vider au moment de la synchronisation. 
+La balise se vide donc au moment où elle commence sa remontée et continue de collecter des données. Si lors de la remontée la mémoire se re-remplit, la balise reste bloquée dans le déplacement de remontée.
 
 ### Correctif
 
