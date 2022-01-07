@@ -11,17 +11,12 @@ import java.io.IOException;
 
 public class GrProgressIndicator extends NiImage {
 
+    BufferedImage file0Percents, file25Percents, file50Percents, file75Percents, file100Percents;
+
     public GrProgressIndicator(GrElementMobile elementMobile) {
         super();
-        File path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/0.png");
-        BufferedImage rawImage = null;
-        try {
-            rawImage = ImageIO.read(path);
-            rawImage = this.resizeImage(rawImage, 20, elementMobile.getHeight());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        this.setImage(rawImage);
+        this.initFiles(elementMobile);
+        this.setImage(file0Percents);
         this.setDimension(new Dimension(elementMobile.getWidth(), elementMobile.getHeight()));
         elementMobile.add(this);
     }
@@ -35,25 +30,27 @@ public class GrProgressIndicator extends NiImage {
     }
 
     public void changeProgressIndicator(ElementMobile element) {
-        BufferedImage rawImage = null;
+        if(this.getImage() != this.getProgressIndicatorFileToDisplay(element))
+            this.setImage(this.getProgressIndicatorFileToDisplay(element));
+    }
+
+    public void initFiles(GrElementMobile elementMobile) {
         try {
-            File path = this.getProgressIndicatorFileToDisplay(element);
-            rawImage = ImageIO.read(path);
-            rawImage = this.resizeImage(rawImage, 20, ((int) this.getHeight()));
-            this.setImage(rawImage);
+            file0Percents = this.resizeImage(ImageIO.read(new File("SatelliteEtBaliseWithDeplacementAsDecorator/0.png")), 20, ((int) elementMobile.getHeight()));
+            file25Percents = this.resizeImage(ImageIO.read(new File("SatelliteEtBaliseWithDeplacementAsDecorator/25.png")), 20, ((int) elementMobile.getHeight()));
+            file50Percents = this.resizeImage(ImageIO.read(new File("SatelliteEtBaliseWithDeplacementAsDecorator/50.png")), 20, ((int) elementMobile.getHeight()));
+            file75Percents = this.resizeImage(ImageIO.read(new File("SatelliteEtBaliseWithDeplacementAsDecorator/75.png")), 20, ((int) elementMobile.getHeight()));
+            file100Percents = this.resizeImage(ImageIO.read(new File("SatelliteEtBaliseWithDeplacementAsDecorator/100.png")), 20, ((int) elementMobile.getHeight()));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public File getProgressIndicatorFileToDisplay(ElementMobile element) {
-        File path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/0.png");
-
-        if(element.dataSize() >= element.memorySize()/4) path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/25.png");
-        if(element.dataSize() >= element.memorySize()/2) path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/50.png");
-        if(element.dataSize() >= ((element.memorySize()/2) + (element.memorySize()/4))) path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/75.png");
-        if(element.dataSize() == element.memorySize()) path = new File("SatelliteEtBaliseWithDeplacementAsDecorator/100.png");
-
-        return path;
+    public BufferedImage getProgressIndicatorFileToDisplay(ElementMobile element) {
+        if(element.dataSize() == element.memorySize()) return file100Percents;
+        else if(element.dataSize() >= ((element.memorySize()/2) + (element.memorySize()/4))) return file75Percents;
+        else if(element.dataSize() >= element.memorySize()/2) return file50Percents;
+        else if(element.dataSize() >= element.memorySize()/4) return file25Percents;
+        else return file0Percents;
     }
 }

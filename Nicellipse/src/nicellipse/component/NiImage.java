@@ -46,4 +46,8 @@ public class NiImage extends JComponent implements NiBasicComponent {
 		g2d.drawImage(this.image, 0, 0, null);
 		g2d.dispose();
 	}
+
+	public Image getImage() {
+		return image;
+	}
 }
