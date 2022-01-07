@@ -18,8 +18,9 @@ Nous avons ajouté un boolean qui permet de savoir si la balise collecte des don
 ```java
 boolean isCollectingData = true;
 ```
+_Désormais lors des **tick()** d'une balise on vérifie si le boolean est à true._
 
-Le boolean est défini à faux lorsque la mémoire de la balise est remplie.
+Le boolean est défini à **faux** lorsque la mémoire de la balise est remplie.
 
 ```java
 if(this.memoryFull()) {
@@ -29,7 +30,7 @@ if(this.memoryFull()) {
 }
 ```
 
-Le boolean est défini à vrai lorsque la balise est redescendue et est prête à collecter.
+Le boolean est défini à **vrai** lorsque la balise est redescendue et est prête à collecter.
 
 ```java
 public void bouge(Balise target) {
