@@ -146,8 +146,8 @@ public class Simulation {
 		this.addBalise(sea, 400, new Point(0, 160), new DeplHorizontal(0, 800));
 		this.addBalise(sea, 70, new Point(200, 100), new DeplVertical(130, 270));
 		this.addBalise(sea, 160, new Point(300, 100), new DeplHorizontal(200, 600));
-		this.addAntenne(sky, 700, new Point(800, 260), 1);
-		this.addAntenne(sky, 700, new Point(10, 260), 1);
+		this.addAntenne(sky, 700, new Point(750, 260), 1);
+		this.addAntenne(sky, 700, new Point(40, 260), 1);
 
 		main.add(sky, JLayeredPane.DEFAULT_LAYER);
 		main.add(sea, JLayeredPane.DEFAULT_LAYER);
