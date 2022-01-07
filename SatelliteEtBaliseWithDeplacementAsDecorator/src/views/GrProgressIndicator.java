@@ -9,6 +9,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Class GrProgressIndicator qui permet de gérer l'aspect et le changement d'un indicateur de progression
+ */
 public class GrProgressIndicator extends NiImage {
 
     BufferedImage file0Percents, file25Percents, file50Percents, file75Percents, file100Percents;
@@ -29,11 +32,19 @@ public class GrProgressIndicator extends NiImage {
         return resizedImage;
     }
 
+    /**
+     * Permet de changer d'indicateur de progression en fonction de l'élément
+     * @param element : Element dont l'indicateur doit être changé
+     */
     public void changeProgressIndicator(ElementMobile element) {
         if(this.getImage() != this.getProgressIndicatorFileToDisplay(element))
             this.setImage(this.getProgressIndicatorFileToDisplay(element));
     }
 
+    /**
+     * Initialise les variables qui contiennent les images des niveaux de chargement, il redimensionne aussi ces images par rapport à la taille de l'élément passé en paramètre
+     * @param elementMobile : Element mobile qui sont ici les balise
+     */
     public void initFiles(GrElementMobile elementMobile) {
         try {
             file0Percents = this.resizeImage(ImageIO.read(new File("SatelliteEtBaliseWithDeplacementAsDecorator/0.png")), 20, ((int) elementMobile.getHeight()));
@@ -46,6 +57,11 @@ public class GrProgressIndicator extends NiImage {
         }
     }
 
+    /**
+     * Permet de renvoyer l'image du niveau de chargement de l'indicateur de progression associé au données de l'élément
+     * @param element : Element qui va permettre de déterminer l'indicateur de progression
+     * @return : L'image de l'indicateur de chargement
+     */
     public BufferedImage getProgressIndicatorFileToDisplay(ElementMobile element) {
         if(element.dataSize() == element.memorySize()) return file100Percents;
         else if(element.dataSize() >= ((element.memorySize()/2) + (element.memorySize()/4))) return file75Percents;
