@@ -9,6 +9,7 @@ Le problème qui intervient suite à l'exécution du programme concerne les bali
 rester bloquées à la surface.
 
 La balise effectue une réinitialisation de ses données pendant qu'elle remonte à la surface et redémarre la collecte.
+Elle reste donc bloqué
 
 ### Correctif
 
@@ -144,10 +145,11 @@ public void paintSynchronisation(Graphics2D g, GrElementMobile e) {
 
 ![compteur](images/color_synchro.png)
 
-- ### Création d'une java-doc
+- ### Doccumentation
+
+Nous avons documenté les éléments importants du code.
+Une [java-doc](java_doc/index.html) est disponible.
 
 - ### Création d'un diagramme UML :
-
-A regenerer
 
 ![UML](images/UML.png)
